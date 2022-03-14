@@ -1,1 +1,8 @@
 install.packages("ggplot2")
+install.packages("readr")
+install.packages("tidycensus")
+install.packages("zipcodeR")
+install.packages("arm")
+install.packages("lme4")
+install.packages("ggthemes")
+install.packages("tigris")

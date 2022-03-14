@@ -4,3 +4,4 @@ output_data/
 *.RData
 *.RDataTmp
 *.Rhistory
+.Rproj.user
