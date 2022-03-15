@@ -3,6 +3,8 @@
 library(dplyr)
 
 # Pull in zipcode to puma crosswalk table
+# This crosswalk generated here: 
+# https://mcdc.missouri.edu/applications/geocorr2018.html
 puma_zipcode_crosswalk <- read.csv("input_data/puma_to_zipcode_crosswalk.csv", 
                                    stringsAsFactors = F,
                                    colClasses = c("character"))
