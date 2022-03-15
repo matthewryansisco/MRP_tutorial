@@ -15,4 +15,4 @@ freq_table_state$prediction <-
 #The predictions are still in logits so we need
 #to transform them back to probabilities:
 # library(boot)
-# freq_table_puma$predictions <- inv.logit(cell_count$predictions)
+# freq_table_puma$predictions <- inv.logit(freq_table_puma$predictions)

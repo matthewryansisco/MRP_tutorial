@@ -77,7 +77,8 @@ table(survey$income_brackets)
 table(acs$PINCP)
 
 acs$income_brackets <-  cut(as.numeric(acs$PINCP), 
-                            breaks=c(-Inf, 15e3, 30e3, 45e3, 60e3, 75e3, 90e3, 105e3, 120e3, 135e3, 150e3, Inf), 
+                            breaks=c(-Inf, 15e3, 30e3, 45e3, 60e3, 75e3, 90e3, 
+                                     105e3, 120e3, 135e3, 150e3, Inf), 
                             labels=levels(survey$income_brackets))
 table(acs$income_brackets)
 
@@ -96,7 +97,8 @@ table(acs$state)#see what we're starting with
 ########## Process possible context level variables
 # Cognitive difficulty
 # Note: not currently used as predictor variable but interesting to map
-# "Because of a physical, mental, or emotional problem, having difficulty remembering, concentrating, or making decisions (DREM)."
+# "Because of a physical, mental, or emotional problem, having difficulty remembering, 
+# concentrating, or making decisions (DREM)."
 table(acs$DREM)
 acs$cognitive_difficulty <- ifelse(acs$DREM == 1, 1, 0)
 

@@ -22,7 +22,8 @@ ggplot() + geom_sf(data=puma_shapefile, lwd=.001, color="black") +
   ggtitle("")
 
 # Merge in data from freq_table_puma
-temp <- freq_table_puma %>% group_by(PUMA) %>% summarize(prediction = weighted.mean(prediction, count))
+temp <- freq_table_puma %>% group_by(PUMA) %>% 
+  summarize(prediction = weighted.mean(prediction, count))
 temp
 puma_shapefile <- merge(puma_shapefile, temp, by.x="PUMACE10", by.y="PUMA")
 

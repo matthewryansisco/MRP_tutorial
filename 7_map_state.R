@@ -14,7 +14,8 @@ state_shapefile <- fortify(state_shapefile, region='stateCE10')
 head(state_shapefile)
 
 # Merge in data from freq_table_state
-temp <- freq_table_state %>% group_by(state) %>% summarize(prediction = weighted.mean(prediction, count))
+temp <- freq_table_state %>% group_by(state) %>% 
+  summarize(prediction = weighted.mean(prediction, count))
 temp
 
 state_shapefile <- merge(state_shapefile, temp, by.x="STUSPS", by.y="state")

@@ -9,10 +9,9 @@ survey$cur_DV <- as.numeric(survey$climate_worry)
 individual.model <- lmer(cur_DV ~
                            (1|age_binned) + (1|education) + (1|income_brackets) + 
                            (1|race) + (1|female) + commute + urban_transport + only_english
-                         # + (1|state)
-                         ,
-                         data=survey
-                           )
+                           # + (1|state)
+                           , data=survey
+                        )
 
 # For binary outcome:
 # individual.model <- glmer(approve_POTUS ~ (1|AGE) + (1|EDUC) +
@@ -28,10 +27,9 @@ ranef(individual.model)
 
 # Fit OLS to check r squared
 summary(lm(cur_DV ~
-                           age_binned + education + income_brackets +
-                           race + female + commute + urban_transport + only_english
-                         # + (1|state)
-                         ,
-                         data=survey
-))
+                  age_binned + education + income_brackets +
+                  race + female + commute + urban_transport + only_english
+                  # + (1|state)
+                  , data=survey
+        ))
 

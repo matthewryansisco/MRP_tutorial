@@ -33,10 +33,14 @@ table(survey$race_5)
 table(survey$hispanic)
 
 survey$race <- "Other"
-survey$race <- ifelse(survey$race_1 == "White" & !is.na(survey$race_1), "White", survey$race)
-survey$race <- ifelse(survey$race_2 == "Black or African American" & !is.na(survey$race_2), "Black", survey$race)
-survey$race <- ifelse(survey$race_5 == "Asian" & !is.na(survey$race_5), "Asian", survey$race)
-survey$race <- ifelse(survey$hispanic == "Yes" & !is.na(survey$hispanic), "Hispanic", survey$race)
+survey$race <- ifelse(survey$race_1 == "White" & !is.na(survey$race_1), 
+                      "White", survey$race)
+survey$race <- ifelse(survey$race_2 == "Black or African American" & !is.na(survey$race_2),
+                      "Black", survey$race)
+survey$race <- ifelse(survey$race_5 == "Asian" & !is.na(survey$race_5), 
+                      "Asian", survey$race)
+survey$race <- ifelse(survey$hispanic == "Yes" & !is.na(survey$hispanic), 
+                      "Hispanic", survey$race)
 
 table(survey$race)
 
@@ -52,5 +56,6 @@ table(survey$income_brackets)
 table(survey$live_zipcode)
 head(zip_code_db)
 # Merge state abbreviation into survey df based on zipcode
-survey <- merge(survey, zip_code_db[,c("zipcode", "state")], by.x="live_zipcode", by.y="zipcode")
+survey <- merge(survey, zip_code_db[,c("zipcode", "state")], 
+                by.x="live_zipcode", by.y="zipcode")
 survey$state

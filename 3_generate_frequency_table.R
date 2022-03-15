@@ -2,10 +2,13 @@ library(dplyr)
 
 # -- Create all combinations of demogr variables and get count for each
 ##### PUMA level
-freq_table_puma <- acs %>% group_by(age_binned, PUMA, female, race, education, income_brackets) %>% summarize(count=n()
-                                                                              # , cognitive_difficulty = mean(cognitive_difficulty)
-                                                                              # , age = mean(AGEP)
-                                                                              )
+freq_table_puma <- acs %>% 
+  group_by(age_binned, PUMA, female, race, education, income_brackets) %>% 
+  summarize(count=n()
+        # , cognitive_difficulty = mean(cognitive_difficulty)
+        # , age = mean(AGEP)
+           )
+
 head(freq_table_puma)
 
 # Add in context-level variables
@@ -25,7 +28,8 @@ sum(freq_table_puma$proportion)#should be 1
 
 
 ##### State level
-freq_table_state <- acs %>% group_by(age_binned, state, female, race, education, income_brackets) %>% 
+freq_table_state <- acs %>% 
+  group_by(age_binned, state, female, race, education, income_brackets) %>% 
   summarize(count=n()
             # , cognitive_difficulty = mean(cognitive_difficulty)
             # , age = mean(AGEP)
@@ -34,10 +38,12 @@ freq_table_state <- acs %>% group_by(age_binned, state, female, race, education,
 head(freq_table_state)
 
 
-state_level_avgs <- acs %>% group_by(state) %>% summarize(commute = mean(JWMNP, na.rm=T),
-                                                        urban_transport = mean(urban_transport, na.rm=T),
-                                                        only_english = mean(only_english, na.rm=T)
-)
+state_level_avgs <- acs %>% group_by(state) %>% 
+  summarize(commute = mean(JWMNP, na.rm=T),
+            urban_transport = mean(urban_transport, na.rm=T),
+            only_english = mean(only_english, na.rm=T)
+            )
+
 head(state_level_avgs)
 freq_table_state <- merge(freq_table_state, state_level_avgs, by="state")
 
