@@ -54,6 +54,3 @@ head(zip_code_db)
 # Merge state abbreviation into survey df based on zipcode
 survey <- merge(survey, zip_code_db[,c("zipcode", "state")], by.x="live_zipcode", by.y="zipcode")
 survey$state
-survey$population_density
-# Impute missing population densities
-survey$population_density[is.na(survey$population_density)] <- median(survey$population_density, na.rm=T)

@@ -11,7 +11,7 @@ names(puma_zipcode_crosswalk)
 head(puma_zipcode_crosswalk)
 # Note: 'afact' is the (population weighted) proportion of the zipcode in each puma
 
-puma_level_avgs <- acs %>% group_by(PUMA) %>% summarize(commute = mean(JWMNP, na.rm=T),
+puma_level_avgs <- acs %>% group_by(PUMA) %>% summarize(commute = mean(commute, na.rm=T),
                                                         urban_transport = mean(urban_transport, na.rm=T),
                                                         only_english = mean(only_english, na.rm=T)
                                                         )

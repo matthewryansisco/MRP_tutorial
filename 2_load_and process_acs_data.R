@@ -50,7 +50,7 @@ acs$race <- "Other"
 acs$race[acs$RAC1P==1] <- "White"
 acs$race[acs$RAC1P==6] <- "Asian"
 acs$race[acs$RAC1P==2] <- "Black"
-acs$race[acs$HISP!=1] <- "Hispanic"
+acs$race[as.numeric(acs$HISP)!=1] <- "Hispanic"
 table(acs$race)
 
 
@@ -76,7 +76,7 @@ table(acs$education)
 table(survey$income_brackets)
 table(acs$PINCP)
 
-acs$income_brackets <-  cut(acs$PINCP, 
+acs$income_brackets <-  cut(as.numeric(acs$PINCP), 
                             breaks=c(-Inf, 15e3, 30e3, 45e3, 60e3, 75e3, 90e3, 105e3, 120e3, 135e3, 150e3, Inf), 
                             labels=levels(survey$income_brackets))
 table(acs$income_brackets)
@@ -90,6 +90,7 @@ table(acs$state)#see what we're starting with
 #convert abbreviation to full name:
 # acs$STATE <- state.name[match(acs$state,state.abb)]
 # table(acs$STATE)#see the result
+
 
 
 ########## Process possible context level variables
@@ -110,4 +111,4 @@ table(acs$urban_transport)
 
 # Distance of commute
 table(acs$JWMNP)
-acs$commute <- acs$JWMNP
+acs$commute <- as.numeric(acs$JWMNP)
