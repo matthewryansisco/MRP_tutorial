@@ -1,8 +1,11 @@
+"This script loads and processes the survey data."
+
 library(zipcodeR)
 download_zip_data()
 
 
 # -- Load in survey data
+# More details and data dictionary here: https://osf.io/6nak7/
 survey <- readRDS("input_data/data_processed_deidentified.rds")
 
 # Subset to only US
@@ -10,6 +13,7 @@ survey <- survey[survey$country_EN == "the United States",]
 
 # Subset to only first response
 survey <- survey[survey$first_complete == 1, ]
+
 
 # -- Inspect and prepare variables
 # SEX
@@ -50,3 +54,6 @@ head(zip_code_db)
 # Merge state abbreviation into survey df based on zipcode
 survey <- merge(survey, zip_code_db[,c("zipcode", "state")], by.x="live_zipcode", by.y="zipcode")
 survey$state
+survey$population_density
+# Impute missing population densities
+survey$population_density[is.na(survey$population_density)] <- median(survey$population_density, na.rm=T)

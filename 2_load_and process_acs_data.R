@@ -1,8 +1,11 @@
+"This script loads the American Community Survey dataset and processes it."
 
 # Load in census data (in this case the American Community Survey data)
 # (This can take a few minutes)
-acs <- read.csv("https://www.dropbox.com/s/z1t9w1olmbd7e7d/all_acs.csv?raw=1",
-                stringsAsFactors = F)
+acs <- read.csv("output_data/subsample_acs.csv",
+                stringsAsFactors = F,
+                colClasses = c("character"))
+# acs <- readRDS("output_data/all_acs.rds")
 
 #You can find the code book here:
 #https://www.dropbox.com/s/8xwn5uper91l0tv/codebook.txt?dl=1
@@ -47,7 +50,7 @@ acs$race <- "Other"
 acs$race[acs$RAC1P==1] <- "White"
 acs$race[acs$RAC1P==6] <- "Asian"
 acs$race[acs$RAC1P==2] <- "Black"
-acs$race[acs$HISP!="01"] <- "Hispanic"
+acs$race[acs$HISP!=1] <- "Hispanic"
 table(acs$race)
 
 
@@ -71,6 +74,7 @@ table(acs$education)
 ###########
 #INCOME
 table(survey$income_brackets)
+table(acs$PINCP)
 
 acs$income_brackets <-  cut(acs$PINCP, 
                             breaks=c(-Inf, 15e3, 30e3, 45e3, 60e3, 75e3, 90e3, 105e3, 120e3, 135e3, 150e3, Inf), 
@@ -88,9 +92,22 @@ table(acs$state)#see what we're starting with
 # table(acs$STATE)#see the result
 
 
-##########
+########## Process possible context level variables
 # Cognitive difficulty
 # Note: not currently used as predictor variable but interesting to map
 # "Because of a physical, mental, or emotional problem, having difficulty remembering, concentrating, or making decisions (DREM)."
 table(acs$DREM)
 acs$cognitive_difficulty <- ifelse(acs$DREM == 1, 1, 0)
+
+# Language other than English spoken at home
+table(acs$LANX)
+acs$only_english <- ifelse(acs$LANX == 1, 0, 1)
+
+# Mode of transportation to work
+table(acs$JWTRNS)
+acs$urban_transport <- ifelse(acs$JWTRNS == "01", 0, 1) # 01 is taking a personal automobile
+table(acs$urban_transport)
+
+# Distance of commute
+table(acs$JWMNP)
+acs$commute <- acs$JWMNP
