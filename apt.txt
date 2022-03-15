@@ -1,0 +1,6 @@
+libudunits2-dev
+libproj-dev
+libgdal-dev
+libgeos-dev
+cmake
+libnlopt-dev
