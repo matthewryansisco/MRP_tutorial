@@ -35,7 +35,8 @@ table(survey$hispanic)
 survey$race <- "Other"
 survey$race <- ifelse(survey$race_1 == "White" & !is.na(survey$race_1), 
                       "White", survey$race)
-survey$race <- ifelse(survey$race_2 == "Black or African American" & !is.na(survey$race_2),
+survey$race <- ifelse(survey$race_2 == "Black or African American" & 
+                      !is.na(survey$race_2),
                       "Black", survey$race)
 survey$race <- ifelse(survey$race_5 == "Asian" & !is.na(survey$race_5), 
                       "Asian", survey$race)

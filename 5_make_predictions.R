@@ -1,3 +1,6 @@
+"This script uses the predictive model previously fitted to generate predictions
+on the frequency tables."
+
 library(readr)
 
 # Load in freq tables if needed

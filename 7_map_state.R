@@ -1,3 +1,5 @@
+"This script aggregates predictions at the level of state and plots them."
+
 library(tigris)
 library(ggplot2)
 library(ggthemes)
@@ -20,7 +22,8 @@ temp
 
 state_shapefile <- merge(state_shapefile, temp, by.x="STUSPS", by.y="state")
 
-ggplot() + geom_sf(data=state_shapefile, aes(fill=prediction), lwd=.001, color="black") + 
+ggplot() + 
+  geom_sf(data=state_shapefile, aes(fill=prediction), lwd=.1, color="black") + 
   theme_bw() + # theme_map()+
   scale_fill_gradientn(colors=rev(heat.colors(10))) +
   ggtitle("MRP Estimated Values")

@@ -7,8 +7,9 @@ acs <- read.csv("output_data/subsample_acs.csv",
                 colClasses = c("character"))
 # acs <- readRDS("output_data/all_acs.rds")
 
-#You can find the code book here:
-#https://www.dropbox.com/s/8xwn5uper91l0tv/codebook.txt?dl=1
+# Data dictionary: 
+# https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMS_Data_Dictionary_2015-2019.pdf
+
 
 # -- Process
 # We must remove people less than 18 to match the voting population
@@ -66,7 +67,7 @@ acs$education[acs$SCHL %in% c(18, 19)] <- "Some college, but no degree"
 acs$education[acs$SCHL %in% c(20)] <- "Associate's degree"
 acs$education[acs$SCHL %in% c(21)] <- "Bachelor's degree"
 acs$education[acs$SCHL %in% c(22)] <- "Master's degree"
-acs$education[acs$SCHL %in% c(23)] <- "Professional degree beyond bachelor's degree"
+acs$education[acs$SCHL %in% c(23)] <- "Professional degree beyond bachelor's"
 acs$education[acs$SCHL %in% c(24)] <- "Doctorate degree"
 table(acs$education)
 
@@ -97,7 +98,7 @@ table(acs$state)#see what we're starting with
 ########## Process possible context level variables
 # Cognitive difficulty
 # Note: not currently used as predictor variable but interesting to map
-# "Because of a physical, mental, or emotional problem, having difficulty remembering, 
+# "Because of a physical, mental, or emotional problem, difficulty remembering, 
 # concentrating, or making decisions (DREM)."
 table(acs$DREM)
 acs$cognitive_difficulty <- ifelse(acs$DREM == 1, 1, 0)
@@ -108,7 +109,8 @@ acs$only_english <- ifelse(acs$LANX == 1, 0, 1)
 
 # Mode of transportation to work
 table(acs$JWTRNS)
-acs$urban_transport <- ifelse(acs$JWTRNS == "01", 0, 1) # 01 is taking a personal automobile
+acs$urban_transport <- ifelse(acs$JWTRNS == "01", 0, 1)
+# 01 is taking a personal automobile
 table(acs$urban_transport)
 
 # Distance of commute

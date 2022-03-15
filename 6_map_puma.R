@@ -1,3 +1,5 @@
+"This script aggregates predictions at the level of PUMA and plots them."
+
 library(tigris)
 library(ggplot2)
 library(ggthemes)
@@ -28,7 +30,8 @@ temp
 puma_shapefile <- merge(puma_shapefile, temp, by.x="PUMACE10", by.y="PUMA")
 
 # Plot
-ggplot() + geom_sf(data=puma_shapefile, aes(fill=prediction), lwd=.001, color="grey") + 
+ggplot() + 
+  geom_sf(data=puma_shapefile, aes(fill=prediction), lwd=.001, color="grey") + 
   theme_bw() + # theme_map()+
   scale_fill_gradientn(colors=c("white", "orange", "red")) +
   ggtitle("")
