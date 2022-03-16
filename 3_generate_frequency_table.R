@@ -27,8 +27,8 @@ sum(freq_table_puma$count)#should be equal to the num of rows in acs
 freq_table_puma$proportion <- freq_table_puma$count / sum(freq_table_puma$count)
 sum(freq_table_puma$proportion)#should be 1
 
-write.csv(freq_table_puma, gzfile("output_data/freq_table_pumalevel.csv.gz"),
-row.names = F)
+# write.csv(freq_table_puma, gzfile("output_data/freq_table_pumalevel.csv.gz"),
+# row.names = F)
 
 
 ##### State level
@@ -61,5 +61,5 @@ freq_table_state$proportion <- freq_table_state$count /
                                   sum(freq_table_state$count)
 sum(freq_table_state$proportion)#should be 1
 
-write.csv(freq_table_state, gzfile("output_data/freq_table_statelevel.csv.gz"),
-row.names = F)
+# write.csv(freq_table_state, gzfile("output_data/freq_table_statelevel.csv.gz"),
+# row.names = F)
