@@ -6,7 +6,7 @@ library(dplyr)
 # -- Create all combinations of demogr variables and get count for each
 ##### PUMA level
 freq_table_puma <- acs %>% 
-  group_by(age_binned, PUMA, female, race, education, income_brackets) %>% 
+  group_by(age_binned, PUMA, ST, female, race, education, income_brackets) %>% 
   summarize(count=n()
         # , cognitive_difficulty = mean(cognitive_difficulty)
         # , age = mean(AGEP)
@@ -16,7 +16,7 @@ head(freq_table_puma)
 
 # Add in context-level variables
 head(puma_level_avgs)
-freq_table_puma <- merge(freq_table_puma, puma_level_avgs, by="PUMA")
+freq_table_puma <- merge(freq_table_puma, puma_level_avgs, by=c("PUMA", "ST"))
 head(freq_table_puma)
 
 sum(freq_table_puma$count)#should be equal to the num of rows in acs
@@ -27,8 +27,8 @@ sum(freq_table_puma$count)#should be equal to the num of rows in acs
 freq_table_puma$proportion <- freq_table_puma$count / sum(freq_table_puma$count)
 sum(freq_table_puma$proportion)#should be 1
 
-# write.csv(freq_table_puma, "output_data/freq_table_pumalevel.csv", 
-# row.names = F)
+write.csv(freq_table_puma, gzfile("output_data/freq_table_pumalevel.csv.gz"),
+row.names = F)
 
 
 ##### State level
@@ -61,5 +61,5 @@ freq_table_state$proportion <- freq_table_state$count /
                                   sum(freq_table_state$count)
 sum(freq_table_state$proportion)#should be 1
 
-# write.csv(freq_table_state, "output_data/freq_table_statelevel.csv", 
-# row.names = F)
+write.csv(freq_table_state, gzfile("output_data/freq_table_statelevel.csv.gz"),
+row.names = F)

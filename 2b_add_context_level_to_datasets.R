@@ -13,7 +13,7 @@ names(puma_zipcode_crosswalk)
 head(puma_zipcode_crosswalk)
 # Note: 'afact' is the (population weighted) proportion of the zip in each puma
 
-puma_level_avgs <- acs %>% group_by(PUMA) %>% 
+puma_level_avgs <- acs %>% group_by(PUMA, ST) %>% 
   summarize(commute = mean(commute, na.rm=T),
             urban_transport = mean(urban_transport, na.rm=T),
             only_english = mean(only_english, na.rm=T)
@@ -21,7 +21,7 @@ puma_level_avgs <- acs %>% group_by(PUMA) %>%
 head(puma_level_avgs)
 
 temp = merge(puma_level_avgs, puma_zipcode_crosswalk, 
-             by.x="PUMA", by.y="puma12", all.x=T)
+             by.x=c("PUMA", "ST"), by.y=c("puma12", "state"), all.x=T)
 head(temp)
 
 # Fill in missing afact values

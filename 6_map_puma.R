@@ -6,7 +6,7 @@ library(ggthemes)
 library(dplyr)
 
 puma_shapefile <- pumas(cb=T, year=2019,
-                        # state="NJ"  # To only pull shapefiles for one state
+                        # state="TX"  # To only pull shapefiles for one state
                         )
 
 # Reduce to continental us
@@ -23,15 +23,18 @@ ggplot() + geom_sf(data=puma_shapefile, lwd=.001, color="black") +
   scale_fill_gradientn(colors=rev(heat.colors(10))) +
   ggtitle("")
 
+
 # Merge in data from freq_table_puma
-temp <- freq_table_puma %>% group_by(PUMA) %>% 
+puma_mrp_estimates <- freq_table_puma %>% group_by(PUMA, ST) %>% 
   summarize(prediction = weighted.mean(prediction, count))
-temp
-puma_shapefile <- merge(puma_shapefile, temp, by.x="PUMACE10", by.y="PUMA")
+puma_mrp_estimates
+puma_shapefile <- merge(puma_shapefile, puma_mrp_estimates, 
+                        by.x=c("PUMACE10", "STATEFP10"), 
+                        by.y=c("PUMA", "ST"))
 
 # Plot
 ggplot() + 
-  geom_sf(data=puma_shapefile, aes(fill=prediction), lwd=.001, color="grey") + 
+  geom_sf(data=puma_shapefile, aes(fill=prediction), lwd=.001, color=NA) + 
   theme_bw() + # theme_map()+
   scale_fill_gradientn(colors=c("white", "orange", "red")) +
   ggtitle("")

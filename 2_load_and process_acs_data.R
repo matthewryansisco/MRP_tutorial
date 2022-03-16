@@ -67,7 +67,8 @@ acs$education[acs$SCHL %in% c(18, 19)] <- "Some college, but no degree"
 acs$education[acs$SCHL %in% c(20)] <- "Associate's degree"
 acs$education[acs$SCHL %in% c(21)] <- "Bachelor's degree"
 acs$education[acs$SCHL %in% c(22)] <- "Master's degree"
-acs$education[acs$SCHL %in% c(23)] <- "Professional degree beyond bachelor's"
+acs$education[acs$SCHL %in% c(23)] <- 
+  "Professional degree beyond bachelor's degree"
 acs$education[acs$SCHL %in% c(24)] <- "Doctorate degree"
 table(acs$education)
 
@@ -88,6 +89,7 @@ table(acs$income_brackets)
 #STATE
 table(survey$state)#check what we have to harmonize to
 table(acs$state)#see what we're starting with
+length(table(acs$state))
 
 #convert abbreviation to full name:
 # acs$STATE <- state.name[match(acs$state,state.abb)]

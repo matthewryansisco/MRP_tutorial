@@ -8,6 +8,7 @@ download_zip_data()
 # More details and data dictionary here: https://osf.io/6nak7/
 survey <- readRDS("input_data/data_processed_deidentified.rds")
 
+
 # Subset to only US
 survey <- survey[survey$country_EN == "the United States",]
 

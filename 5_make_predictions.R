@@ -4,8 +4,8 @@ on the frequency tables."
 library(readr)
 
 # Load in freq tables if needed
-freq_table_puma <- read_csv("output_data/freq_table_pumalevel.zip")
-freq_table_state <- read_csv("output_data/freq_table_statelevel.zip")
+freq_table_puma <- read_csv("output_data/freq_table_pumalevel.csv.gz")
+freq_table_state <- read_csv("output_data/freq_table_statelevel.csv.gz")
 
 #Generate predictions for each cell
 freq_table_puma$prediction <-
