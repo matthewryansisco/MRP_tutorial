@@ -1,7 +1,7 @@
 input_data/
 output_data/
-*.Rproj
+# *.Rproj
 *.RData
-*.RDataTmp
+*.RDataTmp*
 *.Rhistory
 .Rproj.user
