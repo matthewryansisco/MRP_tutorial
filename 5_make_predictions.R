@@ -9,10 +9,10 @@ freq_table_state <- read_csv("output_data/freq_table_statelevel.csv.gz")
 
 #Generate predictions for each cell
 freq_table_puma$prediction <-
-  predict(individual.model, newdata=freq_table_puma)
+  predict(individual.model, newdata=freq_table_puma, allow.new.levels=T)
 
 freq_table_state$prediction <-
-  predict(individual.model, newdata=freq_table_state)
+  predict(individual.model, newdata=freq_table_state, allow.new.levels=T)
 
 # For binary outcomes:
 #The predictions are still in logits so we need
