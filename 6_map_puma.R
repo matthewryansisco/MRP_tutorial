@@ -14,7 +14,6 @@ puma_shapefile <- puma_shapefile[as.numeric(puma_shapefile$STATEFP10)<=56,]
 puma_shapefile <- puma_shapefile[as.numeric(puma_shapefile$STATEFP10) != 2,]
 puma_shapefile <- puma_shapefile[as.numeric(puma_shapefile$STATEFP10) != 15,]
 
-puma_shapefile <- fortify(puma_shapefile, region='PUMACE10')
 head(puma_shapefile)
 
 # Show what's loaded so far (just shapes)
