@@ -13,7 +13,7 @@ acs <- read.csv("output_data/subsample_acs.csv",
 
 # -- Process
 # We must remove people less than 18 to match the voting population
-acs <- subset(acs, AGEP>=18)
+acs <- acs[as.numeric(acs$AGEP)>=18,]
 
 # Now let's harmonize our variables to the survey data:
 
