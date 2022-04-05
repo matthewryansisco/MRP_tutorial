@@ -1,5 +1,6 @@
 "This script compiles the necessary ACS data into a single dateset 'all_acs' and a subset of it 'subsample_acs'"
 
+library(ggplot2)
 library(readr)
 library(tidycensus)
 # tidycensus is for mapping state fips codes to abbreviations
